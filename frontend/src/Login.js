@@ -110,7 +110,7 @@ export default function Login({ onLogin }) {
     setError('');
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/login', form);
+      const res = await axios.post('http://100.27.201.105:5000/api/login', form);
       onLogin(res.data.token, res.data.username);
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed. Try again.');
