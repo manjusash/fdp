@@ -5,18 +5,10 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - echo "=== ROOT CONTENTS ==="
-      - ls -la
-      - echo "=== SRC DIR ==="
-      - echo $CODEBUILD_SRC_DIR
-      - ls -la $CODEBUILD_SRC_DIR
       - npm install --prefix $CODEBUILD_SRC_DIR/frontend
 
   build:
     commands:
-      - echo "=== BUILD PHASE ROOT ==="
-      - ls -la
-      - ls -la $CODEBUILD_SRC_DIR
       - npm run build --prefix $CODEBUILD_SRC_DIR/frontend
 
   post_build:
