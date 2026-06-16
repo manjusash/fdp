@@ -6,15 +6,13 @@ phases:
       nodejs: 18
     commands:
       - echo Installing dependencies...
-      - cd frontend
-      - npm install
-      - chmod -R +x node_modules/.bin
+      - cd frontend && npm install
+      - chmod -R +x frontend/node_modules/.bin
 
   build:
     commands:
       - echo Building React app...
-      - cd frontend
-      - npm run build
+      - cd frontend && npm run build
 
   post_build:
     commands:
