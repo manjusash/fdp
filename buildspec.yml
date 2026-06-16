@@ -5,19 +5,15 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - echo Installing dependencies...
-      - cd frontend && npm install && chmod -R +x node_modules/.bin
+      - cd frontend && npm install
 
   build:
     commands:
-      - echo Building React app...
       - cd frontend && npm run build
 
   post_build:
     commands:
-      - echo Deploying to S3...
       - aws s3 sync frontend/build/ s3://fdp-admin-portal --delete
-      - echo Deploy complete!
 
 artifacts:
   files:
