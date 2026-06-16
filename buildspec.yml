@@ -5,15 +5,23 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - cd frontend && npm install
+      - echo "=== ROOT CONTENTS ==="
+      - ls -la
+      - echo "=== SRC DIR ==="
+      - echo $CODEBUILD_SRC_DIR
+      - ls -la $CODEBUILD_SRC_DIR
+      - npm install --prefix $CODEBUILD_SRC_DIR/frontend
 
   build:
     commands:
-      - cd frontend && npm run build
+      - echo "=== BUILD PHASE ROOT ==="
+      - ls -la
+      - ls -la $CODEBUILD_SRC_DIR
+      - npm run build --prefix $CODEBUILD_SRC_DIR/frontend
 
   post_build:
     commands:
-      - aws s3 sync frontend/build/ s3://fdp-admin-portal --delete
+      - aws s3 sync $CODEBUILD_SRC_DIR/frontend/build/ s3://fdp-admin-portal --delete
 
 artifacts:
   files:
