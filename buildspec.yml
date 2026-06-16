@@ -8,16 +8,18 @@ phases:
       - echo Installing dependencies...
       - cd frontend
       - npm install
+      - chmod -R +x node_modules/.bin
 
   build:
     commands:
       - echo Building React app...
+      - cd frontend
       - npm run build
 
   post_build:
     commands:
       - echo Deploying to S3...
-      - aws s3 sync build/ s3://fdp-admin-portal --delete
+      - aws s3 sync frontend/build/ s3://fdp-admin-portal --delete
       - echo Deploy complete!
 
 artifacts:
